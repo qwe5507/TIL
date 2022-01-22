@@ -24,7 +24,7 @@
 
 <img src="./item/URI.png" width="650" height="400">
 
-> URI는 URL, URN을 포함한다.
+> **URI는 URL, URN을 포함한다.**
 
 ## URL 문법
 <img src="./item/URI 문법.png" width="650" height="400">
@@ -57,10 +57,40 @@
 <br>
 
 # 웹 브라우저 요청 흐름
+<img src="./item/구글 요청.png" width="650" height="400">
+
+### **위와 같은 요청을 하였을때 웹 브라우저의 흐름을 알아본다.**
 
 
+1. **DNS서버를 조회해서 해당 www.google.com이 200.200.200.2라는 ip랑 포트번호를 확인**
 
+2. **웹 브라우저가 HTTP 요청메시지를 생성**
 
+<img src="./item/HTTP요청메시지.png" width="400" height="300">
 
+- HTTP 요청 메시지 
 
+<img src="./item/HTTP메시지전송.png" width="650" height="400">
 
+3. **Socket라이브러리를 통해 tcp/ip계층에 전달**
+	1. 이 떄 3 way handshake로 구글서버와 연결
+    2. 그리고 tcp/ip계층에 데이터 전달
+
+4. **전달받아 데이터를 tcp/ip계층의 추가정보로 감싸 Tcp/ip 패킷생성**
+
+5. **패킷 전송**
+
+---
+### **응답** 
+
+1. **요청받은 구글서버에서 데이터 확인 후 HTTP 응답메시지 생성**
+	- 200 : 정상응답
+    - Content-Type : 응답하는 데이터 형식 
+
+<img src="./item/HTTP응답메시지.png" width="400" height="300">
+
+<img src="./item/응답과정1.png" width="650" height="400">
+
+2. **요청 했을때와 똑같은방식으로 패킷을 생성후 응답한다.**
+
+3. **클라이언트는 요청받은 HTML을 랜더링해서 사용자에게 보여지게 된다.**
