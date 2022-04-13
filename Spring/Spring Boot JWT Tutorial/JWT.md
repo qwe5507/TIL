@@ -1,4 +1,4 @@
-> ###  [인프런 Spring Boot JWT Tutorial](> ###  [진짜 입문자를 위한 클라우드와 AWS](https://www.inflearn.com/course/aws-starter/dashboard)을 보고 정리
+> ###  [인프런 Spring Boot JWT Tutorial](https://www.inflearn.com/course/aws-starter/dashboard)을 보고 정리
 
 <br>
 
