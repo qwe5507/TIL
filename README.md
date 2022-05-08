@@ -25,6 +25,7 @@
     * [제어문](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/04.%EC%A0%9C%EC%96%B4%EB%AC%B8.md)
     * [클래스](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/05.%ED%81%B4%EB%9E%98%EC%8A%A4.md)
     * [상속](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/06.%EC%83%81%EC%86%8D.md)
+    * [패키지](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/07.%ED%8C%A8%ED%82%A4%EC%A7%80.md)
 
 ## WEB
 * 모든 개발자를 위한 HTTP 웹 기본 지식
