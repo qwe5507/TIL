@@ -26,6 +26,8 @@
     * [클래스](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/05.%ED%81%B4%EB%9E%98%EC%8A%A4.md)
     * [상속](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/06.%EC%83%81%EC%86%8D.md)
     * [패키지](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/07.%ED%8C%A8%ED%82%A4%EC%A7%80.md)
+    * [인터페이스](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/08.%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4.md)
+    * [예외 처리](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/09.%EC%98%88%EC%99%B8%EC%B2%98%EB%A6%AC.md)
 
 ## WEB
 * 모든 개발자를 위한 HTTP 웹 기본 지식
