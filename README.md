@@ -30,6 +30,8 @@
     * [예외 처리](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/09.%EC%98%88%EC%99%B8%EC%B2%98%EB%A6%AC.md)
     * [멀티쓰레드 프로그래밍](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/10.%EB%A9%80%ED%8B%B0%EC%93%B0%EB%A0%88%EB%93%9C%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.md)
     * [애노테이션](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/12.%EC%95%A0%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98.md)
+    * [Input, Output](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/13.Input%2C%20Output.md)
+    * [제네릭](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/14.%EC%A0%9C%EB%84%A4%EB%A6%AD.md)
 
 ## WEB
 * 모든 개발자를 위한 HTTP 웹 기본 지식
