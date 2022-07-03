@@ -98,12 +98,34 @@
   - Std. Dev. 는 표준편차 0에가까울수록 요청들이 평균 시간과 가깝고, 높을 수록 들쑥날쑥하다는 말
 
 <br>
+
 ### 시각적으로 보고 싶을때
+
 - HTTP요청 - 오른쪽 클릭 - 추가 - 리스너 -Graph Results 클릭
 
 ![image](https://user-images.githubusercontent.com/70142711/174577934-8f2e1132-ef05-4de5-bc21-055278273b5b.png)
 ![image](https://user-images.githubusercontent.com/70142711/174577939-5d18d782-0bd3-4218-9dec-d08d3c7923d1.png)
 - 마찬가지로 실행하여, 몇초가 걸렸는지 평균, 표준편차,등등을 시각적으로 볼 수 있음.
+
+### 랜덤 데이터를 넣고 싶을떄 
+
+![image](https://user-images.githubusercontent.com/70142711/177032666-96c454fa-41cb-4089-8071-8ff094bb1a97.png)
+
+- 개행문자로 구분되어 있는 csv 파일 생성 
+
+
+![image](https://user-images.githubusercontent.com/70142711/177032699-276b7e26-7fcb-4f59-8e23-753c12d42a38.png)
+- setUp 쓰레드 그룹 - 추가 - 설정 엘리먼트 - CSV데이터셋 설정 클릭
+
+![image](https://user-images.githubusercontent.com/70142711/177032743-e0b21851-9fa5-49f5-9e3b-bed8a6d11d7b.png)
+- 파일이름 : CSV파일 경로 설정
+- 변수 이름 : 변수로 사용할 이름 설정 
+- 구분자 : 구분자 설정 
+  - 개행(\n)을 기준으로 구분한다.
+
+![image](https://user-images.githubusercontent.com/70142711/177032789-5d35414c-eff0-431c-8d2b-bd51aed092e2.png)
+
+- 요청 시에 변수로 설정한 이름을 위와 같이 ${변수}로 설정하면 해당 변수에 CSV파일에 구분자로 구분한 데이터들이 랜덤하게 들어가게 된다.
 
 
 
