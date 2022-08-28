@@ -16,6 +16,8 @@
     * [02.JWT코드, Security설정 추가](https://github.com/qwe5507/TIL/blob/main/Spring/Spring%20Boot%20JWT%20Tutorial/02.JWT%20%EC%BD%94%EB%93%9C%2C%20Security%20%EC%84%A4%EC%A0%95%20%EC%B6%94%EA%B0%80.md)
     * [03.DTO, Repository, 로그인](https://github.com/qwe5507/TIL/blob/main/Spring/Spring%20Boot%20JWT%20Tutorial/03.DTO%2C%20Repository%2C%20%EB%A1%9C%EA%B7%B8%EC%9D%B8.md)
     * [04.회원가입, 권한검증](https://github.com/qwe5507/TIL/blob/main/Spring/Spring%20Boot%20JWT%20Tutorial/04.%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%2C%20%EA%B6%8C%ED%95%9C%EA%B2%80%EC%A6%9D.md)
+* aop
+    * [aop기본](https://github.com/qwe5507/TIL/blob/main/Spring/aop/aop%EA%B0%9C%EB%85%90.md)
 
 ## JAVA
 * WhiteShipStudy
