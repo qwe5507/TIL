@@ -35,6 +35,7 @@
     * [Input, Output](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/13.Input%2C%20Output.md)
     * [제네릭](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/14.%EC%A0%9C%EB%84%A4%EB%A6%AD.md)
     * [람다식](https://github.com/qwe5507/TIL/blob/main/JAVA/WhiteShipStudy/15.%EB%9E%8C%EB%8B%A4%EC%8B%9D.md)
+* [더 자바](https://github.com/qwe5507/TIL/blob/main/JAVA/%EB%8D%94%20%EC%9E%90%EB%B0%94%208/%EB%8D%94%EC%9E%90%EB%B0%948.md)
 
 ## WEB
 * 모든 개발자를 위한 HTTP 웹 기본 지식
