@@ -38,8 +38,18 @@
 * [더 자바8](https://github.com/qwe5507/TIL/blob/main/JAVA/%EB%8D%94%20%EC%9E%90%EB%B0%948.md)
 * [더 자바 코드를 조작하는 다양한 방법](https://github.com/qwe5507/TIL/blob/main/JAVA/%EB%8D%94%20%EC%9E%90%EB%B0%94%20%EC%BD%94%EB%93%9C%EB%A5%BC%20%EC%A1%B0%EC%9E%91%ED%95%98%EB%8A%94%20%EB%8B%A4%EC%96%91%ED%95%9C%20%EB%B0%A9%EB%B2%95.md)
 * GoF 디자인 패턴
-    * [싱글톤패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/01.%EC%8B%B1%EA%B8%80%ED%86%A4%ED%8C%A8%ED%84%B4.md)
-
+    * [싱글톤 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/01.%EC%8B%B1%EA%B8%80%ED%86%A4%ED%8C%A8%ED%84%B4.md)
+    * [팩토리 메소드 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/02.%ED%8C%A9%ED%86%A0%EB%A6%AC%20%EB%A9%94%EC%86%8C%EB%93%9C%20%ED%8C%A8%ED%84%B4.md)
+    * [추상 팩토리 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/03.%EC%B6%94%EC%83%81%20%ED%8C%A9%ED%86%A0%EB%A6%AC%20%ED%8C%A8%ED%84%B4.md)
+    * [빌더 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/04.%20%EB%B9%8C%EB%8D%94%20%ED%8C%A8%ED%84%B4.md)
+    * [프로토타입 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/05.%20%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%20%ED%8C%A8%ED%84%B4.md)
+    * [어댑터 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/06.%EC%96%B4%EB%8C%91%ED%84%B0%20%ED%8C%A8%ED%84%B4.md)
+    * [브릿지 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/07.%20%EB%B8%8C%EB%A6%BF%EC%A7%80%20%ED%8C%A8%ED%84%B4.md)
+    * [컴포짓 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/08.%20%EC%BB%B4%ED%8F%AC%EC%A7%93%20%ED%8C%A8%ED%84%B4.md)
+    * [데코레이터 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/09.%20%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0%20%ED%8C%A8%ED%84%B4.md)
+    * [퍼사드 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/10.%20%ED%8D%BC%EC%82%AC%EB%93%9C%20%ED%8C%A8%ED%84%B4.md)
+    
+    
 ## WEB
 * 모든 개발자를 위한 HTTP 웹 기본 지식
     * [인터넷 네트워크](https://github.com/qwe5507/TIL/blob/main/Web/%EB%AA%A8%EB%93%A0%20%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC%20%EC%9C%84%ED%95%9C%20HTTP%20%EC%9B%B9%20%EA%B8%B0%EB%B3%B8%20%EC%A7%80%EC%8B%9D/01.%20%EC%9D%B8%ED%84%B0%EB%84%B7%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC.md)
