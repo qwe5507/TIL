@@ -48,7 +48,13 @@
     * [컴포짓 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/08.%20%EC%BB%B4%ED%8F%AC%EC%A7%93%20%ED%8C%A8%ED%84%B4.md)
     * [데코레이터 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/09.%20%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0%20%ED%8C%A8%ED%84%B4.md)
     * [퍼사드 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/10.%20%ED%8D%BC%EC%82%AC%EB%93%9C%20%ED%8C%A8%ED%84%B4.md)
-    
+    * [플라이웨이트 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/11.%20%ED%94%8C%EB%9D%BC%EC%9D%B4%EC%9B%A8%EC%9D%B4%ED%8A%B8%20%ED%8C%A8%ED%84%B4.md)
+    * [프록시 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/12.%20%ED%94%84%EB%A1%9D%EC%8B%9C%20%ED%8C%A8%ED%84%B4.md)
+    * [책임 연쇄 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/13.%20%EC%B1%85%EC%9E%84%20%EC%97%B0%EC%87%84%20%ED%8C%A8%ED%84%B4.md)
+    * [커맨드 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/14.%20%EC%BB%A4%EB%A7%A8%EB%93%9C%20%ED%8C%A8%ED%84%B4.md)
+    * [인터프리터 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/15.%20%EC%9D%B8%ED%84%B0%ED%94%84%EB%A6%AC%ED%84%B0%20%ED%8C%A8%ED%84%B4.md)
+    * [이터레이터 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/16.%20%EC%9D%B4%ED%84%B0%EB%A0%88%EC%9D%B4%ED%84%B0%20%ED%8C%A8%ED%84%B4.md)
+    * [중재자 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/17.%20%EC%A4%91%EC%9E%AC%EC%9E%90%20%ED%8C%A8%ED%84%B4.md)
     
 ## WEB
 * 모든 개발자를 위한 HTTP 웹 기본 지식
