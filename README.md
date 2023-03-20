@@ -55,6 +55,13 @@
     * [인터프리터 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/15.%20%EC%9D%B8%ED%84%B0%ED%94%84%EB%A6%AC%ED%84%B0%20%ED%8C%A8%ED%84%B4.md)
     * [이터레이터 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/16.%20%EC%9D%B4%ED%84%B0%EB%A0%88%EC%9D%B4%ED%84%B0%20%ED%8C%A8%ED%84%B4.md)
     * [중재자 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/17.%20%EC%A4%91%EC%9E%AC%EC%9E%90%20%ED%8C%A8%ED%84%B4.md)
+    * [메멘토 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/18.%20%EB%A9%94%EB%A9%98%ED%86%A0%20%ED%8C%A8%ED%84%B4.md)
+    * [옵저버 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/19.%20%EC%98%B5%EC%A0%80%EB%B2%84%20%ED%8C%A8%ED%84%B4.md)
+    * [상태 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/20.%20%EC%83%81%ED%83%9C%20%ED%8C%A8%ED%84%B4.md)
+    * [전략 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/21.%20%EC%A0%84%EB%9E%B5%20%ED%8C%A8%ED%84%B4.md)
+    * [템플릿 메소드 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/22.%20%ED%85%9C%ED%94%8C%EB%A6%BF%20%EB%A9%94%EC%86%8C%EB%93%9C%20%ED%8C%A8%ED%84%B4.md)
+    * [비지터 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/23.%20%EB%B9%84%EC%A7%80%ED%84%B0%20%ED%8C%A8%ED%84%B4.md)
+    
     
 ## WEB
 * 모든 개발자를 위한 HTTP 웹 기본 지식
