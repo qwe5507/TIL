@@ -52,3 +52,24 @@ ReactDOM.createRoot(document.querySelector('#root')).render(<LikeButton/>);
 - **컴포넌트는 하나의 태그로 감싸져야 한다.**
     - 바벨툴을 설치해야 컴포넌트의 최상단에 `<>` `</>` 를 지원한다.
 - **Dom에 직접 접근하고 싶을 땐, ref를 사용한다.**
+
+---
+# Hooks란?
+
+```java
+const GuGuDan = () => {
+		return <div>Hello, Hooks</div>;
+}
+```
+
+위와 같은 문법을 함수 컴포넌트 라고 한다.
+
+- 클래스 컴포넌트에서 `ref`나 `setState`같은 기능들을 사용할 필요가 없을 때 사용했다고 한다.
+
+사람들은 함수 컴포넌트에서도 `setState`나, `ref`를 사용할 수 있게, 요청함
+
+이런 기능들을 React팀이 추가한게 `Hooks`임
+
+- `use` 붙은게 Hooks임
+- 코드량이 훨씬 줄어든다.
+- Hooks는 `useRef` 로 DOM에 접근한다.
