@@ -10,7 +10,7 @@
 
 - 데이터와 화면의 일치
 - 데이터가 바뀌면 화면이 자동으로 바뀌게끔
-    - 기존의 html을 js로 변경하는것 과 달리, 리액트는 반대
+    - 기존의 html을 js로 변경 하는것 과 달리, 리액트는 반대
 
 **JSX란?**
 
@@ -42,18 +42,34 @@ ReactDOM.createRoot(document.querySelector('#root')).render(<LikeButton/>);
 
 - React18버전은 17버전의 코드도 인식은 하지만, React 18버전의 기능이 동작하지 않는다.
 
+- **바벨이란?**
+    
+    `소스 대 소스 컴파일러` 라고 한다. 
+    
+    js는 인터프리터 언어인데 왜 컴파일러가 필요한가? 
+    
+    특정 상황(타입스크립트, JSX, 크로스브라우징, 폴리필)에 맞게 코드를 변환해 주는 역할을 한다.
+    
+    웹팩과 주로 같이 사용 된다고 함
+    
+    - RF : https://lihano.tistory.com/20
+
 ---
 
 - **리액트는 항상 데이터를 중심으로 생각해야 한다.**
     - 데이터가 변경 되는 부분을 state로 지정해야 한다.
 - **객체를 변경하지 말고, 복사해라(불변성)**
     - React는 state객체를 복사하여 대체 할 수 있게, 변경 함수를 제공
-- `{}` 안에는 JS문법을 사용 할 수 있다.**
+- `**{}` 안에는 JS문법을 사용 할 수 있다.**
 - **컴포넌트는 하나의 태그로 감싸져야 한다.**
     - 바벨툴을 설치해야 컴포넌트의 최상단에 `<>` `</>` 를 지원한다.
 - **Dom에 직접 접근하고 싶을 땐, ref를 사용한다.**
+- react에서 사용하지 못하는 태그 속성 명이 있다.
+    - `class` → `className`
+    - `for` → `htmlFor`
 
 ---
+
 # Hooks란?
 
 ```java
@@ -68,8 +84,271 @@ const GuGuDan = () => {
 
 사람들은 함수 컴포넌트에서도 `setState`나, `ref`를 사용할 수 있게, 요청함
 
+### Hooks의 특징
+
 이런 기능들을 React팀이 추가한게 `Hooks`임
 
 - `use` 붙은게 Hooks임
 - 코드량이 훨씬 줄어든다.
 - Hooks는 `useRef` 로 DOM에 접근한다.
+- Hooks는 state가 변경되면, 함수 자체가 다시 실행 된다.
+    - 클래스문법은 render()만 다시 실행 된다.
+    - setState는 비동기 이기 때문에, 여러번 setState를 실행해도, 한번 실행된걸로 간주하고 함수는 한번 재 실행된다.
+- Hooks도 클래스문법과 마찬가지로 setState의 이전값을 활용 할 수 있다.
+    
+    ```jsx
+    setResult(prevResult => {
+        return '정답 :' + prevResult
+    });
+    ```
+    
+
+---
+
+### 웹팩이란?
+
+- 여러개의 js파일을 하나의 js파일로 합쳐준다.
+- node가 필요하다.
+    - node는 자바스크립트 실행기
+    - 웹팩도 js고, node가 웹팩을 실행한다.
+
+### **create-react-app 기능 엿보기**
+
+여러 js파일들을 웹팩이 `app.js` 파일로 합쳐준다. 
+
+**package.json**
+
+npm을 통해 설치된 패키지 목록을 관리하고 프로젝트의 정보 및 기타 실행 스크립트를 작성하는 파일
+
+**package.json 파일 생성**
+
+```jsx
+npm init
+```
+
+```jsx
+{
+  "name": "lecture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack"
+  },
+  "author": "simpson",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+	  "@babel/core": "^7.22.8", // 기본적인 바벨, 이전 브라우저도 호환되게 최신문법 변환
+		"@babel/plugin-proposal-class-properties": "^7.18.6",
+	  "@babel/preset-env": "^7.22.7", // 환경에 맞게 변경해주는
+	  "@babel/preset-react": "^7.22.5", // jsx파일 변경
+	  "babel-loader": "^9.1.3", // 바벨과 웹팩 연결
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
+```
+
+- `npm i react react-dom`
+    - react와 react-dom패키지를 추가
+- `npm i -D @babel/core`
+    - 위 명령어로  바벨 관련 패키지 추가
+- `devDependencies`는 개발에서만 사용되는 의존성이다.
+    - `webpack`과 `babel`은 개발에서만 사용한다.
+- 웹팩 다운로드
+    
+    ```jsx
+    npm i -D webpack webpack-cli
+    ```
+    
+    - `-D` : 개발할 떄만 사용
+    - 웹팩은 개발할때만 필요하다.
+    - `webpack`과 `webpac-cli`를 둘다 설치 해야 한다.
+    
+
+```jsx
+const React = require('react');
+const ReactDom = require('react-dom');
+```
+
+이제 npm에 설치했던 패키지를 위와 같이 불러올 수 있다.
+
+**WordRelay.jsx**
+
+```jsx
+const React = require('react');
+const {Component} = React;
+
+class WordRelay extends React.Component {
+    state = {
+        text: 'Hello, webpack'
+    };
+    render() {
+        return <h1>{this.state.text}</h1>
+    }
+}
+
+module.exports = WordRelay;
+```
+
+- 컴포넌트 별로 필요한 라이브러리는 위와 같이 추가해야 한다.
+- `module.exports` 로 모듈이름 설정
+
+**client.jsx파일 생성** 
+
+```jsx
+const React = require('react');
+const ReactDom = require('react-dom');
+
+const WordRelay = require('./WordRelay');
+
+ReactDom.render(<WordRelay/>, document.querySelector('#root'));
+```
+
+- 밑의 **`webpack.config.js` 파일에서 합칠 js파일에 WordRelay 파일은 추가하지 않아도 된다.**
+    - client.jsx파일에서 불러오기 때문에 자동으로 불러와 합쳐준다.
+        - `webpack.config.js`의 entry에 추가하지 않아도 된다.
+
+**webpack.config.js 파일 생성**
+
+- 별다른 설정이 없다면, **webpack.config.js 파일명 이어야 한다.**
+
+```jsx
+const path = require('path');
+
+module.exports = {
+    name: 'wordrelay-setting', //웹팩 설정 이름, 딱히 의미없음
+    mode: 'development', // 실서비스에선 production
+    devtool: 'eval', // 개발에선 eval, 운영에선 hidden-source-map
+    resolve: {
+        extensions: ['.js', '.jsx'] // 밑의 엔트리 파일명의, 확장자 알아서 찾아줌
+    },
+
+    entry: {
+        // client.jsx안에 WordRelay.jsx를 불러오기때문에 안적어줘도 된다.
+        app: ['./client']
+    }, // 입력
+
+    module: {
+        rules: [{
+            test: /\.jsx?/,
+            loader: 'babel-loader',
+            options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: ['@babel/plugin-proposal-class-properties']
+            }
+        }]
+    },
+
+    output: {
+        path: path.join(__dirname, 'dist'), // 현재폴더경로/dist
+        filename: 'app.js'
+    }, // 출력
+}
+```
+
+- `entry`에 합칠 파일들을, `output`은 합친 파일의 결과물을 의미한다.
+    - 입력은 `client.jsx` / `WordRelay.jsx`
+    - 출력은 `app.js`
+- 여러 파일의 확장자를 일일이 지정하는 것은 어렵기 떄문에, `resolve:extensions:` 옵션을 사용하면 파일의 확장자를 알아서 찾아준다.
+- `module`에 바벨 설정을 추가했다.
+    - `test` : 정규표현식, `js` 또는 `jsx`파일 인식
+    - `loader` : babel-loader를 지정하여, 최신문법 호환되게 변경
+    - `options` : babel-loader옵션
+        - `presets:` 환경에 맞게 변환적용, jsx변환
+            - plugin들의 모음이 presets이다(수십개의 plugin들이 합쳐져있음)
+            - presets도 옵션을 지정할 수있다.
+            - `presets 옵션 은 아래에 설명`
+        - `plugins` : 클래스 프로퍼티(class properties) 문법을 사용할 수 있도록 해준다.
+
+`entry`의 파일들을 읽고, `module`을 적용한 후, `output`으로 뺀다고 생각
+
+**웹팩 실행**
+
+```jsx
+npx webpack
+```
+
+설정을 마친 후 위 명령어로 `현재경로/dist` 안에 `app.js`파일이 생성된다.
+
+indext.html**파일 생성**
+
+```jsx
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>끝말잇기</title>
+</head>
+<body>
+<div id="root"></div>
+<script src="./dist/app.js"></script>
+</body>
+</html>
+```
+
+- client.jsx파일은 `./dist/app.js`파일만 불러오면 된다.
+    - 바벨로 인해 변환된 파일들과, 웹팩으로 합쳐진 결과 파일
+
+---
+
+### 웹팩 설정 추가 설명
+
+**webpack.config.js presets옵션 설정**
+
+```jsx
+const path = require('path');
+const webpack = require('webpack');
+
+module.exports = {
+    name: 'gugudan-setting',
+    mode: 'development', // 실서비스 : production
+    devtool: 'eval',
+    resolve: {
+        extensions: ['.js', '.jsx'] // 밑의 엔트리 파일명의, 확장자 알아서 찾아줌
+    },
+
+    entry: {
+        app: ['./client']
+    }, // 입력
+
+    module: {
+        rules: [{
+            test: /\.jsx?/,
+            loader: 'babel-loader',
+            options: {
+                presets: [
+                    ['@babel/preset-env', {
+                        targets: {
+                            browsers: ['> 5% in KR', 'last 2 chrome versions'],
+                        },
+                        debug: true,
+                    }
+                    ],
+                    '@babel/preset-react'],
+                plugins: []
+            }
+        }]
+    },
+    plugins: [
+        new webpack.LoaderOptionsPlugin({ debug: true}),
+    ],
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'app.js'
+    }, // 출력
+}
+```
+
+위와 같이 `@babel/preset-env` 에 대한 상세 옵션을 지정할 수 있다.
+
+- `@babel/preset-env`  옵션은 최신 문법이 해당 환경에 지원되게 해주는 설정
+- 너무 예전 환경까지 포함하면, 바벨이 작업량이 늘어나기 떄문에 설정 해주는게 좋다.
+- `한국에서 점유율 5% 이상인 브라우저`, `크롬의 최근 두 번째 버전` 등의 옵션을 지정할 수 있다.
+    - `browserslist` 검색
+- 추가적인 플러그인은 module과 같은 위치의 plugins에 추가 할 수 있다.
+    - 참고 : 위 플러그인은 Lodaer의 Options에 debug true옵션을 전부 넣어주는 플러그인
