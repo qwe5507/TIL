@@ -124,6 +124,8 @@ npm을 통해 설치된 패키지 목록을 관리하고 프로젝트의 정보 
 
 ```jsx
 npm init
+or
+npm run dev
 ```
 
 ```jsx
