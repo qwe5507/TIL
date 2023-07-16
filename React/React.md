@@ -354,3 +354,120 @@ module.exports = {
     - `browserslist` 검색
 - 추가적인 플러그인은 module과 같은 위치의 plugins에 추가 할 수 있다.
     - 참고 : 위 플러그인은 Lodaer의 Options에 debug true옵션을 전부 넣어주는 플러그인
+
+# 웹팩 데브 서버와 핫 리로딩
+
+**핫리로딩 라이브러리 설치**
+
+```jsx
+npm i react-refresh @pmmmwh/react-refresh-webpack-plugin -D
+```
+
+- 핫리로딩 기능을 지원하는 라이브러리 두개를 개발용으로 설치
+
+**웹팩 데브 서버 설치**
+
+```jsx
+npm i -D webpack-dev-server
+```
+
+- 프론트도 개발을 위한 서버가 필요함
+
+**package.json**  변경
+
+```jsx
+**{
+  "name": "lecture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --env development" // 변경
+  },
+  "author": "simpson",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.8",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-env": "^7.22.7",
+    "@babel/preset-react": "^7.22.5",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "babel-loader": "^9.1.3",
+    "react-refresh": "^0.14.0",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}**
+```
+
+- `npm run dev` 명령어 입력 시, 위의 명령어 실행
+
+**설정**
+
+```jsx
+const path = require('path');
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'); // 추가
+
+module.exports = {
+    name: 'wordrelay-setting',
+    mode: 'development', 
+    devtool: 'eval',
+    resolve: {
+        extensions: ['.js', '.jsx'] 
+    },
+
+    entry: {
+        
+        app: ['./client']
+    }, 
+
+    module: {
+        rules: [{
+            test: /\.jsx?/,
+            loader: 'babel-loader',
+            options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: [
+                    '@babel/plugin-proposal-class-properties',
+                    'react-refresh/babel'// (1)추가 
+                ]
+            }
+        }]
+    },
+    plugins: [
+        new RefreshWebpackPlugin() // (2)추가 - 빌드할 때마다 실행 됨
+    ],
+    output: {
+        path: path.join(__dirname, 'dist'), 
+        filename: 'app.js',
+				publicPath: '/dist', // devServer가 사용하는 가상경로
+    }, 
+		devServer: { // (3)
+				// 웹팩이 빌드한 빌드파일 경로, dev에선 메모리에 저장
+        devMiddleware: { publicPath: '/dist' }, 
+				// 현재 위치 기준, 실제 존재하는 정적파일 경로 (index.html)
+        static: { directory: path.resolve(__dirname) }, 
+        hot: true
+    }
+```
+
+- (2) Refresh 플러그인 추가
+- (1) babel-loader에 플러그인 추가
+    - 바벨이 변환할 때 핫 리로딩 기능을 추가해준다.
+- (3) 데브서버 설정 추가
+    - **`webpack-dev-server@4`버전 부터는 위와 같이 devServer설정을 해줘야 함**
+    - `hot: true`
+        - 핫리로딩 옵션을 사용, build의 결과물을 `/dist` 에 메모리로 저장하고 소스코드의 변경점을 감지하고, 감지되면 결과물을 수정 해준다.
+        - 핫리로딩이란, 기존 데이터를 유지하면서 리로딩하는 것을 뜻한다.
+        - webpack dev server가 원래 변경점을 감지하였을때, 리로딩은 지원한다
+            - 이 경우 데이터 날아감
+            - `react-refresh` `@pmmmwh/react-refresh-webpack-plugin` 이 핫리로딩이 가능하게 지원해주는 것
+
+- `npm run dev`  로 실행해도, 메모리에 저장,  실제 빌드 되지 않는다.
+
+
