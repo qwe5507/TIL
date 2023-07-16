@@ -67,7 +67,8 @@ ReactDOM.createRoot(document.querySelector('#root')).render(<LikeButton/>);
 - react에서 사용하지 못하는 태그 속성 명이 있다.
     - `class` → `className`
     - `for` → `htmlFor`
-
+- state가 변경 되었을 때, 다시 랜더링 되기 떄문에, 객체의 경우 다른 객체로 대체하여 변경해야 한다.
+    - List가 상태인 State에 push해도 다시 렌더링되지 않는다.
 ---
 
 # Hooks란?
@@ -101,7 +102,26 @@ const GuGuDan = () => {
         return '정답 :' + prevResult
     });
     ```
-    
+
+### useState()의 초기값에 함수를 작성 할떄는 주의할 점
+```
+const NumberBaseball = () => {
+    const [result, setResult] = useState('');
+    const [value, setValue] = useState('');
+    const [answer, setAnswer] = useState(getNumber); // lazy init
+    const [tries, setTries] = useState([]);
+
+...
+...
+```
+위 와 같은 함수컴포넌트와 State가 있을 때, 함수안의 내용은 state가 변경되어 재 랜더링 될때마다 실행된다. 
+- `const [answer, setAnswer] = useState(getNumber);` 와 같이 `getNumber`함수를 실행하지않고 정의만하면 `answer`의 초기값으로 `getNumber`의 리턴값이 세팅된다.
+    - 그 후 재 랜더링 되어도, 함수가 다시 실행되지 않음.
+- `const [answer, setAnswer] = useState(getNumber());` 이렇게 `getNumber()`로 작성하여도 초기값이 지정되고, 두번째 랜더링부터는 실행은 되지만, 값을 무시하기 때문에 상관은 없지만, `getNumber`로 작성하는게 좋다
+    - 쓸데없이, 함수가 호출되기 떄문에 비효율적이다.
+
+getNumber와 같이 함수만 지정하는것을 lazy init이라고 한다.
+- 함수가 호출되어, 값을 세팅해줄때까지 기다린다고 해서 lazy init이라고 함
 
 ---
 
@@ -491,3 +511,22 @@ webpack은 node에서 동작하기 때문에 node문법인 require를 사용해�
 그러나 바벨이 import를 require로 변경해준다. 
 
 둘 다 사용해도 된다.
+---
+
+### Map의 Key
+
+- 리액트는 Map안의 컴포넌트에 key를 보고 같은 컴포넌트 인지 판단 및 성능 최적화를 하기 때문에, unique한 값을 넣어줘야 한다.  (ex: 고유한값이나 uuid)
+- key에 map의 index를 넣어주면 안됨
+
+---
+
+### 참고: this
+
+화살표 함수를 사용하지 않으면, 함수안에서 this를 사용하지 못한다.(엄격모드에서 undefined)
+그러면 constroctor를 사용해야 한다.(코드가 복잡해짐)
+
+왠만하면 화살표함수 사용
+
+- 화살표 함수는 외부 this를 사용
+
+---
