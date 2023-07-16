@@ -453,7 +453,7 @@ module.exports = {
 				// 현재 위치 기준, 실제 존재하는 정적파일 경로 (index.html)
         static: { directory: path.resolve(__dirname) }, 
         hot: true,
-        liveReload: true
+        liveReload: false
     }
 ```
 
@@ -468,7 +468,7 @@ module.exports = {
         - webpack dev server가 원래 변경점을 감지하였을때, 리로딩은 지원한다
             - 이 경우 데이터 날아감
             - `react-refresh` `@pmmmwh/react-refresh-webpack-plugin` 이 핫리로딩이 가능하게 지원해주는 것
-    - `liveReload: true`
+    - `liveReload: false`
         - 이 설정을 해야 리로딩 안하고, 결과가 바뀐다.
 - `npm run dev`  로 실행해도, 메모리에 저장,  실제 빌드 되지 않는다.
 
