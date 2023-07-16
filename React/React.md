@@ -124,10 +124,8 @@ npm을 통해 설치된 패키지 목록을 관리하고 프로젝트의 정보 
 
 ```jsx
 npm init
-or
-npm run dev
 ```
-
+- 이미 package.json이 존재하면, `npm install`로 라이브러리 다운로드
 ```jsx
 {
   "name": "lecture",
@@ -486,3 +484,10 @@ module.exports = {
 - 리액트는 컨트롤드 인풋 권장
 
 
+### Require와 import
+
+webpack은 node에서 동작하기 때문에 node문법인 require를 사용해야 한다.
+
+그러나 바벨이 import를 require로 변경해준다. 
+
+둘 다 사용해도 된다.
