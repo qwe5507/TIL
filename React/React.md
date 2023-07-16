@@ -316,6 +316,14 @@ indext.html**파일 생성**
 - client.jsx파일은 `./dist/app.js`파일만 불러오면 된다.
     - 바벨로 인해 변환된 파일들과, 웹팩으로 합쳐진 결과 파일
 
+**참고 - `create-react-app` 실행 시, webpack.config.js가 없는 이유**
+
+`create-react-app`이 내부적으로 웹팩 설정을 추상화하고 감춘다.
+
+`create-react-app`은 프로젝트의 웹팩 설정을 자동으로 처리하고, 내부에서 사용하는 `react-scripts` 패키지를 통해 웹팩 관련 동작을 제어한다.
+
+`react-scripts`는 프로젝트를 시작하고 개발 서버를 실행하는 데 필요한 모든 설정을 처리합니다.
+
 ---
 
 ### 웹팩 설정 추가 설명
@@ -533,4 +541,135 @@ webpack은 node에서 동작하기 때문에 node문법인 require를 사용해�
 - 화살표 함수는 외부 this를 사용
 
 ---
+
+### React DevTools
+
+- DevTools에서 React소스는 숨기기 어렵지만, Redux소스는 개발자가 숨겨야 함
+    - 데이터 노출 위험
+
+---
+
+### 재 랜더링 방지
+
+react는 state의 값이 변경되지 않아도, `setState()`함수가 호출만 되도 재 랜더링 된다. (class문법 일때)
+
+**class컴포넌트**
+
+```jsx
+shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (this.state.counter != nextState.counter) {
+        return true;
+    }
+    return false;
+}
+```
+
+- class문법에서는 `shouldComponentUpdate` 내장함수를 사용해서 return 값이 true일 경우만, 재 랜더링 하게 할 수 있다.
+
+다른 방법으로는 위 `shouldComponentUpdate`  기능을 구현한 `PureComponent`를 사용해도, 값이 변경되지 않을 때, 재 랜더링이 되지 않는다.
+
+- 참조 관계가 있는 객체의 경우,  값이 변경되었는지, 정확히 판단 할 수 없다.
+- class컴포넌트에서만 사용 가능
+- `PureComponent`는 내부적으로 `shouldComponentUpdate` 메서드를 구현하여 얕은 비교를 통해 `props`와 `state`의 변경 여부를 확인한다.
+- `PureComponent`는 `props`나 `state`의 변경이 없을 경우 재랜더링을 방지하고 이전에 렌더링한 결과를 재 사용한다.
+- `shouldComponentUpdate`  가 필요한 경우에는 그냥 `Component`를 쓴다.
+- https://ryublock.tistory.com/38
+
+리액트에서 컴포넌트는 `state변경`, `props변경`, `부모컴포넌트가 재랜더링 되었을 떄` 재 랜더링 된다.
+
+`function`컴포넌트는 `PureComponent`가 없지만, 비슷한 기능을 하는 `memo`가 있다.
+
+```jsx
+import React, {memo} from 'react';
+
+const Try = memo(({ tryInfo }) => {
+    console.log('try 재랜더링')
+    return (
+        <li>
+            <div>{tryInfo.try}</div>
+            <div>{tryInfo.result}</div>
+        </li>
+    )
+});
+Try.displayName='Try';
+export default Try;
+```
+
+위와 같은 자식 컴포넌트가 있고, memo함수로 전체 function을 감싼다.
+
+- `memo`는 부모컴포넌트가 재 랜더링 되었을 때, 재 랜더링 되는것을 막아준다.
+    - 부모 컴포넌트의 state가 변경되어도 재랜더링 되지 않는다.
+    - 부모 컴포넌트에서 전달하는 props의 변경은 재 랜더링 된다.
+- `Try.displayName='Try'`
+    - `memo`를 사용하면, 랜더링된 컴포넌트명이 이상하게 변경된다, `displayName`으로 다시 Try로 지정해주는게 좋다.
+
+---
+
+### React.createRef
+
+- 클래스에서 Dom을 조작하기 위해 ref를 사용할 때는, creatRef()를 사용해도 되고 기존방식을 사용해도 된다.
+- 기존방식
+    
+    ```jsx
+    
+    ...
+    input; // this.input을 생성
+    
+    onRefInput = (c) => {
+        .. 미세한 로직
+        this.input = c;
+    };
+    
+    render() {
+        return (
+            <>
+                <div>{this.state.word}</div>
+                <form onSubmit={this.onSubmitForm}>
+                    <input ref={this.onRefInput} value={this.state.value} onChange={this.onChangeInput} />
+                    <button>클릭!!!</button>
+                </form>
+                <div>{this.state.result}</div>
+            </>
+        );
+    }
+    ...
+    ```
+    
+    - 위 와같이 특정 미세한 로직이 필요한 경우는 기존대로 함수 사용
+- createRef()를 사용하면, hooks의 useRef()와 비슷하게 current를 사용한다.
+
+---
+
+### props와 state 연결하기
+
+부모로부터 전달 받은 props는 자식이 변경하면 안된다. 
+
+- 부모 컴포넌트가 뜻하지 않게 변경될 수 있기 때문에
+- 부모가 변경해야 함
+
+```jsx
+import React, {memo, useState} from 'react';
+
+const Try = memo(({ tryInfo }) => {
+    const [result, setResult] = useState(tryInfo.result);
+
+    const onClick = () => {
+        setResult('1');
+    };
+
+    return (
+        <li>
+            <div>{tryInfo.try}</div>
+            <div onClick={onClick}>{result}</div>
+        </li>
+    )
+});
+Try.displayName='Try';
+
+export default Try;
+```
+
+자식컴포넌트에서 props를 변경해야 할 경우가 생긴다면, props를 본인의 state로 변경한다음, state를 변경한다.
+
+
 
