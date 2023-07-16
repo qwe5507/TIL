@@ -94,7 +94,9 @@ const GuGuDan = () => {
 - Hooks는 `useRef` 로 DOM에 접근한다.
 - Hooks는 state가 변경되면, 함수 자체가 다시 실행 된다.
     - 클래스문법은 render()만 다시 실행 된다.
-    - setState는 비동기 이기 때문에, 여러번 setState를 실행해도, 한번 실행된걸로 간주하고 함수는 한번 재 실행된다.
+    - `setState`는 비동기 이기 때문에, 여러번 `setState`를 실행해도, 한번 실행된걸로 간주하고 함수는 한번 재 실행된다.
+    - `state`나 `props`가 변경 될 때 재 랜더링 된다.
+    - 부모 컴포너틑가 재 랜더링되면, 자식 컴포넌트도 재 랜더링 된다.
 - Hooks도 클래스문법과 마찬가지로 setState의 이전값을 활용 할 수 있다.
     
     ```jsx
@@ -102,7 +104,7 @@ const GuGuDan = () => {
         return '정답 :' + prevResult
     });
     ```
-
+- 
 ### useState()의 초기값에 함수를 작성 할떄는 주의할 점
 ```
 const NumberBaseball = () => {
@@ -511,6 +513,7 @@ webpack은 node에서 동작하기 때문에 node문법인 require를 사용해�
 그러나 바벨이 import를 require로 변경해준다. 
 
 둘 다 사용해도 된다.
+
 ---
 
 ### Map의 Key
@@ -530,3 +533,4 @@ webpack은 node에서 동작하기 때문에 node문법인 require를 사용해�
 - 화살표 함수는 외부 this를 사용
 
 ---
+
