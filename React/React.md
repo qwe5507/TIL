@@ -355,7 +355,7 @@ module.exports = {
 - 추가적인 플러그인은 module과 같은 위치의 plugins에 추가 할 수 있다.
     - 참고 : 위 플러그인은 Lodaer의 Options에 debug true옵션을 전부 넣어주는 플러그인
 
-# 웹팩 데브 서버와 핫 리로딩
+### 웹팩 데브 서버와 핫 리로딩
 
 **핫리로딩 라이브러리 설치**
 
@@ -445,7 +445,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'), 
         filename: 'app.js',
-				publicPath: '/dist', // devServer가 사용하는 가상경로
+				publicPath: '/dist', // devServer가 사용하는 결과물간의 상대경로
     }, 
 		devServer: { // (3)
 				// 웹팩이 빌드한 빌드파일 경로, dev에선 메모리에 저장
@@ -453,7 +453,7 @@ module.exports = {
 				// 현재 위치 기준, 실제 존재하는 정적파일 경로 (index.html)
         static: { directory: path.resolve(__dirname) }, 
         hot: true,
-        liveReload: false
+				liveReload: false
     }
 ```
 
@@ -468,8 +468,21 @@ module.exports = {
         - webpack dev server가 원래 변경점을 감지하였을때, 리로딩은 지원한다
             - 이 경우 데이터 날아감
             - `react-refresh` `@pmmmwh/react-refresh-webpack-plugin` 이 핫리로딩이 가능하게 지원해주는 것
-    - `liveReload: false`
-        - 이 설정을 해야 리로딩 안하고, 결과가 바뀐다.
-- `npm run dev`  로 실행해도, 메모리에 저장,  실제 빌드 되지 않는다.
+        - `liveReload: false`
+            - 이 설정을 해야 리로딩 안하고, 결과가 바뀐다.
+    - `npm run dev`  로 실행해도, 메모리에 저장,  실제 빌드 되지 않는다.
+- console에 어떤 변경점떄문에 핫 리로드 되는지 알 수 있다.
+    ![image](https://github.com/qwe5507/TIL/assets/70142711/da664779-00a1-4323-93de-ef0ae1c4ea59)
+
+
+### 컨트롤드 인풋 vs 언컨트롤드 인풋
+
+- input에 value와 onChange가 존재하는게 `컨트롤드 인풋`
+- input에 아무것도 없는게 `언컨트롤드 인풋`
+    - `e.target.children.word.value=''`와 같이 사용하여, value를 대체 할 수 있기 떄문에
+    - input의 순서대로 배열 인덱스가 된다.(e.target[0], e.target[1])
+    - 순수한 html의 기능
+- 기타 여러 기능떄문에 컨트롤드 인풋을 사용하자.
+- 리액트는 컨트롤드 인풋 권장
 
 
