@@ -677,5 +677,36 @@ export default Try;
 
 자식컴포넌트에서 props를 변경해야 할 경우가 생긴다면, props를 본인의 state로 변경한다음, state를 변경한다.
 
+---
+# 라이프사이클
+
+라이프사이클은 컴포넌트가 생성되고 업데이트되며 파괴되는 과정에서 발생하는 일련의 메서드들의 순서와 단계를 의미한다.
+
+라이프사이클 메서드는 컴포넌트가 특정 상태에 도달할 때 실행한다.
+
+## 클래스 문법
+
+`componentDidMount()`
+
+- `render()` 함수가 처음 랜더링 될 때, 실행되는 함수
+- state가 변경되어 재 랜더링 될 때는 실행되지 않는다.
+
+`componentDidUpdate()`
+
+- 재 랜더링시에 실행되는 함수
+- `state`나 `props`가 변경되었을 떄
+
+`componentWillUnmount()` 
+
+- 컴포넌트가 제거되기 직전에 실행 되는 함수
+- 부모가 자식 컴포넌트를 없앴을 때
+
+### 클래스 문법의 라이프 사이클
+
+```jsx
+constructor -> 첫 render -> ref -> componentDidMount 
+-> (setState/props 바뀔 때 -> shouldComponentUpdate(true) ->  render -> componentDidUpdate)
+-> 부모가 나를 없앴을 떄 -> componentWillUnmount -> 소멸
+```
 
 
