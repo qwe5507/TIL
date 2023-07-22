@@ -91,7 +91,6 @@ const GuGuDan = () => {
 
 - `use` 붙은게 Hooks임
 - 코드량이 훨씬 줄어든다.
-- Hooks는 `useRef` 로 DOM에 접근한다.
 - Hooks는 state가 변경되면, 함수 자체가 다시 실행 된다.
     - 클래스문법은 render()만 다시 실행 된다.
     - `setState`는 비동기 이기 때문에, 여러번 `setState`를 실행해도, 한번 실행된걸로 간주하고 함수는 한번 재 실행된다.
@@ -124,6 +123,13 @@ const NumberBaseball = () => {
 
 getNumber와 같이 함수만 지정하는것을 lazy init이라고 한다.
 - 함수가 호출되어, 값을 세팅해줄때까지 기다린다고 해서 lazy init이라고 함
+
+### useRef()
+
+- Hooks는 `useRef` 로 DOM에 접근한다.
+- `useState`는 값이 변경되면 화면이 변경된다.
+- Dom의 접근 말고도, 화면의 변경없이 값만 변경할 필요가 있을 때, `useRef` 에 값을 넣고 사용한다.
+    - 보통 timeout이나 interval 같은건 ref안에 넣어 사용한다.
 
 ---
 
