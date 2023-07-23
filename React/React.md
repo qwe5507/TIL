@@ -608,6 +608,8 @@ export default Try;
     - 부모 컴포넌트에서 전달하는 props의 변경은 재 랜더링 된다.
 - `Try.displayName='Try'`
     - `memo`를 사용하면, 랜더링된 컴포넌트명이 이상하게 변경된다, `displayName`으로 다시 Try로 지정해주는게 좋다.
+- 일반적으로 반복문을 기점으로 자식 컴포넌트를 사용한다.
+    - 자식 컴포넌트는 일반적으로 `PureComponent`나 `memo`로 감싸서 생성한다.
 
 ---
 
