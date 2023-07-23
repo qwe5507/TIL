@@ -734,8 +734,8 @@ useEffect(() => { // componentDidMount, componentDidUpdate 역할 (1대1 대응�
     - `componentDidUpdate`와 유사
 - useEffect의 두번째 인자가 `[]` 빈 배열일 경우, 첫 번째 인자인 함수의 리턴 값이 실행된다.
     - `componentWillUnmount`  와 같다.
-- useEffect의 두번째 인자가 요소가 존재하면, 해당 요소의 변경으로 useEffect가 새로 시작하기 전에 실행 된다고 한다.
-
+- useEffect의 두번째 인자가 요소가 존재하면, 해당 요소의 변경으로 `useEffect가 새로 시작하기 전에 실행` + `컴포넌트가 Unmount`될 때 실행된다.
+  
 - 배열안에 여러 개의 요소를 넣으면, 둘 중 하나만 변경되어도 실행 된다.
 - 여러개의 useEffect를 사용할 수 있다.
 
