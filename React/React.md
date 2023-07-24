@@ -732,12 +732,16 @@ useEffect(() => { // componentDidMount, componentDidUpdate 역할 (1대1 대응�
 - class의 라이프사이클과 1대1 대응이라고 생각 하면 안되고 조금 씩 다르다
 - useEffect의 두번째 인자가 `[]` 빈 배열일 경우, 첫 번째 인자인 함수는 컴포넌트가 처음 랜더링 될 때 실행된다.
     - `componentDidMount`와 유사
-- useEffect의 두번째 인자에 요소가 존재하면, 첫 번째 인자인 함수가 해당 요소가 변경 될 때마다 실행 된다.
-    - `componentDidUpdate`와 유사
-- useEffect의 두번째 인자가 `[]` 빈 배열일 경우, 첫 번째 인자인 함수의 리턴 값이 실행된다.
+- useEffect의 두번째 인자에 요소가 존재하면, 첫 번째 인자인 함수가 해당 요소가 변경 될 때마다 실행 된다. + 처음 랜더링 될 떄도 실행
+    - `componentDidUpdate`와 유사 + `componentDidMount`
+- useEffect의 두번째 인자가 `[]` 빈 배열일 경우, `컴포넌트가 언마운트 될 때` 첫 번째 인자인 함수의 리턴 값이 실행된다.
     - `componentWillUnmount`  와 같다.
-- useEffect의 두번째 인자가 요소가 존재하면, 해당 요소의 변경으로 `useEffect가 새로 시작하기 전에 실행` + `컴포넌트가 Unmount`될 때 실행된다.
-  
+- useEffect의 두번째 인자가 요소가 존재하면, 해당 요소의 변경으로 useEffect가 `새로 시작하기 전에 리턴문 실행` + `컴포넌트가 Unmount`될 때 실행된다.
+
 - 배열안에 여러 개의 요소를 넣으면, 둘 중 하나만 변경되어도 실행 된다.
 - 여러개의 useEffect를 사용할 수 있다.
+- 두번 째 인자는 꼭 state가 아니여도 된다.
+    - useRef등등..
+    - 값이 변화하면 재 실행
+
 
