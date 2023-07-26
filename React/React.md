@@ -824,5 +824,29 @@ useEffect(() => {
 }, []); //componentDidUpdate만, componentDidMount x
 ```
 
+---
+
+## useReducer
+
+useReducer는 React 컴포넌트 내에서 Redux의 리듀서와 유사한 방식으로 상태 관리를 할 수 있도록 하기 위해 도입된 훅입니다.
+
+- 소규모 앱에서는 useReducer + Context API 조합으로 사용가능 하지만,
+    - 비동기 작업에 취약해서
+- 대규모 앱에서는 Redux를 사용해야 한다.
+
+```jsx
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+
+- **`state`**: 현재 상태를 나타내는 변수입니다.
+- **`dispatch`**: 액션을 발생시키는 함수로, 리듀서 함수를 호출하여 상태를 변경합니다.
+- **`reducer`**: 리듀서 함수로, 현재 상태와 액션을 받아서 다음 상태를 반환합니다.
+- **`initialState`**: 초기 상태로, 컴포넌트가 처음 마운트될 때의 상태를 나타냅니다.
+
+`useReducer`는 주로 다음과 같은 상황에서 사용됩니다:
+
+1. 컴포넌트의 상태가 복잡하고 중첩되어 있는 경우
+2. 컴포넌트가 여러 개의 상태를 가지고 있는 경우
+3. 상태 변경 로직이 복잡하거나, 여러 컴포넌트에서 공유해야 하는 경우
 
 
