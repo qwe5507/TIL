@@ -857,3 +857,55 @@ const [state, dispatch] = useReducer(reducer, initialState);
 - 최적화 시, `memo`를 먼저 사용하고, `memo`를 사용해도 쓸데없는 리 랜더링이 발생하면, 그때 `useMemo`로 컴포넌트 자체를 기억하고, 특정 값이 변경되었을 때만 다시 생성하게 한다.
 
 ---
+## Context API
+
+1. `Context API`
+    - React의 기능 중 하나로, 컴포넌트 간에 데이터를 전달하는 방법을 제공한다.
+    - 주로 중첩된 컴포넌트 간에 데이터를 전달하거나 글로벌 상태 관리에 사용된다.
+    - `React.createContext()`를 사용하여 새로운 컨텍스트를 생성하고, 컨텍스트의 값을 사용할 자식 컴포넌트를 `Provider 컴포넌트`로 감싸 사용합니다.
+2. **`useContext`**
+    - React의 훅 중 하나로, 함수형 컴포넌트에서만 사용할 수 있다.
+    - `useContext`를 사용하여 특정 Context 객체에 접근하여 컨텍스트에서 제공하는 값을 가져올 수 있다.
+    - 코드를 간결하게 만들어주고, Context에 저장된 값을 쉽게 사용할 수 있게 해준다.
+
+**context API는 성능 최적화 하기 힘들다.** 
+
+```java
+const MineSearch = () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    return (
+        <TableContext.Provider value={{ tableData: state.tableData, dispatch }}>
+            <Form></Form>
+            <div>{state.timer}</div>
+            <Table></Table>
+            <div>{state.result}</div>
+        </TableContext.Provider>
+    )
+};
+```
+
+위와 같이 Provider의 값을 지정하면 `MineSearch`컴포넌트가 리랜더링 될때마다 `Context`의 값이 변경되게 된다.
+
+- `Context`를 사용하는 자식 컴포넌트들도 재 랜더링된다.
+
+```java
+const MineSearch = () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    const value = useMemo(() => ({ tableData: state.tableData, dispatch }), [state.tableData]);
+
+    return (
+        <TableContext.Provider value={value}>
+            <Form></Form>
+            <div>{state.timer}</div>
+            <Table></Table>
+            <div>{state.result}</div>
+        </TableContext.Provider>
+    )
+};
+```
+
+위와 같이 Provider의 값을 지정할 떄는, `useMemo`로 감싸주어 캐싱, 특정 값이 변경되었을 때만 재 생성하는게 좋다.
+
+- `dispatch`는 절대 변하지 않는 값이므로, 배열에 추가할 필요가 없다.
+  
