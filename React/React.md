@@ -908,4 +908,57 @@ const MineSearch = () => {
 위와 같이 Provider의 값을 지정할 떄는, `useMemo`로 감싸주어 캐싱, 특정 값이 변경되었을 때만 재 생성하는게 좋다.
 
 - `dispatch`는 절대 변하지 않는 값이므로, 배열에 추가할 필요가 없다.
-  
+
+위와 같이 적용해도 Context API의 state가 변경되면 어쩔수 없이 재 랜더링 되는 부분이 있다.
+
+```jsx
+const Td = memo(({rowIndex, cellIndex}) => {
+    const {tableData, dispatch, halted} = useContext(TableContext);
+
+    const onClickTd = useCallback(() => {
+			//로직...
+    }, [tableData[rowIndex][cellIndex], halted]);
+
+    const onRightClickTd = useCallback((e) => {
+			//로직...
+    }, [tableData[rowIndex][cellIndex], halted]);
+
+    console.log('td rendered'); // 여기까지 재랜더링
+
+    return useMemo(()=> ( // useMemo로 컴포넌트를 한번더 캐싱
+        <td style={getTdStyle(tableData[rowIndex][cellIndex])}
+        onClick={onClickTd}
+        onContextMenu={onRightClickTd}
+        >
+            {getTdText(tableData[rowIndex][cellIndex])}
+        </td>
+    ), [tableData[rowIndex][cellIndex]])// 해당 cell이 변경되었을 때만 컴포넌트 재 생성
+});
+```
+
+ `td rendered` 부분은 재랜더링 되지만, 실제 컴포넌트를 useMemo로 캐싱하여, 실제 컴포넌트는 값이 변경되었을 때만 재 생성 되게 한다.
+
+- 함수자체는 여러번 실행되지만, 컴포넌트 부분은 한번만 실행된다.
+
+```jsx
+ // 로직...
+console.log('td rendered');
+
+    return <RealTd onClickTd={onClickTd} onRightClickTd={onRightClickTd} data={tableData[rowIndex][cellIndex]} />;
+});
+Td.displayName = 'Td';
+
+const RealTd = memo(({ onClickTd, onRightClickTd, data}) => {
+    console.log('real td rendered');
+    return (
+        <td
+            style={getTdStyle(data)}
+            onClick={onClickTd}
+            onContextMenu={onRightClickTd}
+        >{getTdText(data)}</td>
+    )
+});
+```
+
+위와 같이 컴포넌트를 분리하여, memo로 감싸는 방법도 있다.
+
