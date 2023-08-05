@@ -1059,6 +1059,123 @@ devServer: {
     console.log(location.search) // ?hello=test
     console.log(urlSearchParams.get('hello')); // test
     ```
+---
+
+![image](https://github.com/qwe5507/TIL/assets/70142711/69b702b7-293f-454c-a23c-43e390e50951)
+
+위 Hooks 라이프 사이클을 보면 Render후에 useEffect를 실행한다.
+
+만약 useEffect에서 값을 변경하면, 처음 화면을 렌더하고, 값을 변경하면 재랜더링 되어 두번 랜더링 되게 된다.
+
+- 고객은 화면의 깜빡임을 느껴 사용자 편의성이 줄어든다.
+
+### useLayoutEffect
+
+useLayoutEffect는 화면을 렌더링 하기 전에 실행 하여 깜빡임을 없앨 수 있다.
+
+- useEffect는 비동기적 실행, useLayoutEffect는 동기적인 실행
+
+### useTransition(출처 : https://doiler.tistory.com/83)
+
+**`useTransition`**은 React의 특별한 훅(Hook) 중 하나로, React v18에서 도입된 기능입니다. 이 훅은 느린 컴포넌트의 업데이트를 비동기적으로 처리하고, 사용자 경험을 향상시키는 데 사용됩니다.
+
+일반적으로 React에서 컴포넌트가 업데이트될 때, 모든 업데이트가 즉시 반영되고 브라우저가 렌더링을 시작합니다. 이 때, 느린 컴포넌트의 업데이트가 발생하면 화면이 끊기거나 사용자 경험이 저하될 수 있습니다. **`useTransition`**을 사용하면 이러한 문제를 해결할 수 있습니다.
+
+```jsx
+import { useTransition, config } from 'react';
+
+function MyComponent() {
+  const [isPending, startTransition] = useTransition({
+    timeoutMs: 3000, // 트랜지션 타임아웃 시간 설정 (옵션)
+  });
+
+  const handleClick = () => {
+    // 느린 업데이트를 비동기적으로 시작
+    startTransition(() => {
+      // 업데이트 작업 수행
+      // setState, useState 등으로 상태 업데이트
+
+      // 약간의 시간이 소요되는 느린 작업 수행
+      // 브라우저가 렌더링을 시작하지 않습니다.
+
+      // 트랜지션이 끝나면 브라우저가 업데이트를 반영합니다.
+    });
+  };
+
+  return (
+    <button onClick={handleClick}>
+      {isPending ? 'Loading...' : 'Click Me'}
+    </button>
+  );
+}
+```
+
+위의 예시에서 **`useTransition`**을 사용하여 **`isPending`**과 **`startTransition`**을 얻습니다. **`isPending`**은 비동기 업데이트가 진행 중인지를 나타내는 상태 변수입니다. **`startTransition`**은 업데이트를 비동기적으로 시작할 수 있는 함수입니다.
+
+**`startTransition`** 함수를 호출할 때, 느린 업데이트를 수행하는 함수를 전달합니다. 이 함수는 느린 업데이트 작업을 처리하고, 화면 끊김 없이 비동기적으로 처리되도록 합니다. **`startTransition`** 함수를 호출하면 **`isPending`** 상태가 **`true`**로 변경되고, **`timeoutMs`**로 설정한 시간(예: 3000ms)이 지나면 브라우저가 업데이트를 반영합니다. 이렇게 함으로써 브라우저 렌더링이 끊기지 않고 사용자 경험이 향상됩니다.
+
+- **`useTransition`** 훅에서 **`timeoutMs`**를 지정하지 않으면, 기본적으로 약간의 딜레이 후에 비동기 업데이트가 처리됩니다. React는 내부적으로 비동기 업데이트를 최적화하기 위해 자체적인 타임아웃 값을 사용합니다. 이 경우 **`timeoutMs`**를 지정하지 않아도 일반적으로 300ms 정도의 기본 딜레이가 적용됩니다.
+
+### useDeferredValue(출처 : https://doiler.tistory.com/83)
+
+먼저 useDeferredValue는 상태 값 변화에 낮은 우선순위를 지정하기 위한 훅이다.
+
+아래 코드에서 count2의 값을 가장 낮은 우선순위로 상태를 변경하고 싶을 경우에는 useDeferredValue로 count2를 래핑하면 된다.
+
+```jsx
+import { useDeferredValue, useState } from "react";
+
+export default function Home() {
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
+  const [count3, setCount3] = useState(0);
+  const [count4, setCount4] = useState(0);
+
+  const deferredValue = useDeferredValue(count2);
+
+  const onIncrease = () => {
+    setCount1(count1 + 1);
+    setCount2(count2 + 1);
+    setCount3(count3 + 1);
+    setCount4(count4 + 1);
+  };
+
+  console.log({ count1 });
+  console.log({ count2 });
+  console.log({ count3 });
+  console.log({ count4 });
+  console.log({ deferredValue });
+
+  return <button onClick={onIncrease}>클릭</button>;
+}
+```
+
+onIncrease 함수를 실행하게 되면 count2의 값은 바뀌게 되었는데 deferredValue의 값은 다른 상태변화가 다 발생하고 가장 나중에 변경되게 된다.
+
+### useDeferredValue vs useTransition
+
+useDeferredValue와 useTransition hook은 상태변화의 우선순위를 낮게 하는 hook이다. 그렇다면 두 hook의 차이점은 무엇일까?
+
+먼저 useDeferredValue는 값을 래핑해서 사용한다. 아래 예시 코드를 보면 count2라는 값을 래핑 해서 count2 값이 바뀌어도 deferredValue는 다른 상태변화가 전부 일어난 후에 바뀌게 된다. 즉, useDeferredValue는 값을 래핑 해서 값의 변화의 우선순위를 낮추도록 한다.
+
+```jsx
+const deferredValue = useDeferredValue(count2);
+```
+
+다음은 useTransition hook이다. useTransition은 useDeferredValue와 다르게 값이 아닌, 함수를 래핑한다. 아래 예시 코드를 보면  () => { setText(e.target.value) } 함수를 래핑하고 있다. 래핑 된 함수의 우선순위를 낮춰서 다른 상태 변경이 전부 일어난 후 해당 함수를 실행하게 된다.
+
+```jsx
+startTransition(() => {
+  setText(e.target.value);
+});
+```
+
+마치 useMemo는 값을 메모이제이션하고 useCallback은 함수를 메모이제이션 하는 것과 같이 값이냐 함수냐로 구분할 수 있다.
+
+### 결론
+
+- useDeferredValue는 상태 값에 우선순위를 낮추는 hook
+- useTransition은 상태 변화를 일으키는 함수의 우선순위를 낮추는 hook이다
 
 
 
