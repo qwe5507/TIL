@@ -962,3 +962,103 @@ const RealTd = memo(({ onClickTd, onRightClickTd, data}) => {
 
 위와 같이 컴포넌트를 분리하여, memo로 감싸는 방법도 있다.
 
+
+# React-router
+
+### React-router(v6) 설치
+
+```jsx
+npm i react-router
+npm i react-router-dom
+```
+
+- `react-router`
+    - react-router 기본기능
+- `npm i react-router-dom`
+    - 웹 환경에서의 router
+    - react native면 `react-router-native` 사용
+
+사용은 `react-router-dom` 만 하고, 내부적으로 `react-router-dom` 가 react-router를 사용한다.
+
+**웹팩 기능 추가**
+
+```jsx
+devServer: {
+        historyApiFallback: true, // 추가
+        devMiddleware: { publicPath: '/dist' },
+        static: { directory: path.resolve(__dirname) },
+        hot: true,
+        liveReload: false
+    }
+```
+
+**`historyApiFallback`** 설정은 브라우저에서 발생하는 모든 요청을 기본적으로 **`index.html`**로 리다이렉트하여 리액트 SPA의 라우팅을 동작하도록 보장해준다.
+
+- Create React App에는 기본적으로 포함 된다.
+
+- Hooks컴포넌트에서는 React를 불러오는 node_modules가 두 개 이상이면 에러가 발생한다.
+    - 클래스컴포넌트는 위와 같은 제약사항이 없음
+
+### `BrowserRouter` vs `HashRouter`
+
+1. `HashRouter`
+    - URL에 해시(#) 기호를 사용하여 라우팅을 처리하는 방식
+    - URL의 해시 부분을 사용하여 브라우저의 주소창에 표시되는 URL과 실제 라우팅되는 경로를 매핑합니다.
+        - 예를 들어, **`http://example.com/#/about`**과 같은 URL을 사용
+    - 페이지 새로고침 시에도 서버로 요청을 보내지 않고, 단일 페이지 애플리케이션(SPA)을 구현하는 데 용이하다.
+    - URL이 약간 덜 깔끔해 보이고, SEO(Search Engine Optimization)에 불리하다는 단점이 있다.
+2. `BrowserRouter`
+    - 최신 HTML5 히스토리 API를 사용하여 라우팅을 처리하는 방식
+    - HTML5 히스토리 API를 사용하면 브라우저의 주소창에 보여지는 URL과 실제 라우팅되는 경로가 일치한다.
+    - 더 직관적이고 깔끔한 URL을 제공하며, 검색 엔진 최적화(SEO)에도 더 유리하다.
+
+대부분의 경우, `BrowserRouter` 를 사용하는 것이 좋다.
+
+### Link
+
+**`Link`** 컴포넌트는 SPA에서 페이지 전환에 최적화되어 있으며, **`<a>`** 태그와 달리 브라우저의 히스토리를 조작하여 새로운 요청 없이 페이지 전환을 구현한다.
+
+- 이를 통해 웹 애플리케이션의 사용자 경험을 향상시키고, 빠른 페이지 이동을 가능하게 합니다
+
+`NavLink` 는 확성화된 Link의 특정 클래스를 추가하여 Link될 떄마다 특정 css나 기능을 추가하기 쉬운 기능이다.
+
+---
+
+### react-router v5 → v6
+
+- 기존의 `Switch`  대신에 `Routes`로 변경되었다.
+- `Route` 는 `Routes` 의 직속 자식이어야만 작동한다.
+- 서브경로가 필요한 경우 path에 `*` 사용
+- 기존의 정확한 path경로를 제공하던 `exact` 키워드는 사라지고, default로 제공된다.
+- `/game/:name` 와같은 path 경로명에 값을 추출할때에는 `useParams()` 훅을 사용한다.
+- `useHistory`대신 `useNavigate`사용
+    - 기능은 거의 동일하나, 뒤로가기 등을 사용할 때, `-1`, `-2` 등 뒤로갈 페이지 숫자를 지정한다.
+- 특정 경로로 데이터를 전달 할때에는, navigate의 두번째 인자에 데이터를 실어보낸다.
+    
+    ```jsx
+    const navigate = useNavigate();
+    //...
+    navigate('/game/number-baseball', {state: {test: 'testtest'}});
+    ```
+    
+    ```jsx
+    const location = useLocation();
+    
+    console.log(location.state); // {test: 'testtest'}
+    ```
+    
+    **`useLocation()`** 훅을 사용하여 현재 페이지의 **`location`** 객체를 가져오고, 그 중에서**`location.state`**를 사용하여 전달된 상태의 **data** 값을 추출합니다.
+    
+- 특정 쿼리스트링은 `newURLSearchParams` 객체를 통해 간편하게 추출 할 수 있다.
+    
+    ```jsx
+    // url : http://localhost:8080/game/number-baseball?hello=test
+    
+    const location = useLocation();
+    let urlSearchParams = newURLSearchParams(location.search.slice(1)); // 쿼리스트링 추출
+    console.log(location.search) // ?hello=test
+    console.log(urlSearchParams.get('hello')); // test
+    ```
+
+
+
