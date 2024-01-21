@@ -151,6 +151,39 @@ public static long sumOverThreeAndDouble(List<Integer> numbers) {
 - [🚀 3단계 - 수강신청(DB 적용)](https://github.com/next-step/java-lms/pull/339)
 - [🚀 4단계 - 수강신청(요구사항 변경)](https://github.com/next-step/java-lms/pull/356)
 
+**1. Enum `values()` 성능 개선**
+```java
+public static ImageType of(final String name) {
+        return Arrays.stream(values())
+                .filter(n -> n.name.equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_FILE_TYPE_MSG));
+}
+```
+처음에는 위와같이 Enum의 정적 메소드에 `values()`를 사용하였다.
+- 메소드가 호출 될때마다 `values()` 실행
+  - `O(n)` 시간복잡도
+    
+고정된 값인 `values()`를 피드백을 받고 개선
+```java
+    private static final ImageType[] imageTypes = values();
+    //...
 
-  
+    public static ImageType of(final String name) {
+        return Arrays.stream(imageTypes)
+                .filter(n -> n.name.equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_FILE_TYPE_MSG));
+```
+Enum의 `values()`를 위와같이 변경
+- 해당 step은 통과되었으나, 다시 생각해보니 filter에서 동일하게 O(n)이 발생하는건 같다고 생각되어 Map을 통해 개선
+
+```java
+private static final Map<String, ImageType> imageTypeMap =
+        Collections.unmodifiableMap(Stream.of(values())
+            .collect(Collectors.toMap(ImageType::getName(), Function.identity())));
+```
+- 위와 같이 Enum의 `name필드를 Key`로, `Enum을 value`인 Map을 생성하여 조회 시점에 Map에서 찾게 되면 조회 성능은 `O(1)`이 된다.
+
+
 
