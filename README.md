@@ -61,7 +61,9 @@
     * [전략 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/21.%20%EC%A0%84%EB%9E%B5%20%ED%8C%A8%ED%84%B4.md)
     * [템플릿 메소드 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/22.%20%ED%85%9C%ED%94%8C%EB%A6%BF%20%EB%A9%94%EC%86%8C%EB%93%9C%20%ED%8C%A8%ED%84%B4.md)
     * [비지터 패턴](https://github.com/qwe5507/TIL/blob/main/JAVA/GofDesignPattern/23.%20%EB%B9%84%EC%A7%80%ED%84%B0%20%ED%8C%A8%ED%84%B4.md)
-    
+* [TDD, 클린 코드 with Java 17기](https://github.com/qwe5507/TIL/blob/main/JAVA/TDD%2C%20%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C%20with%20Java%2017%EA%B8%B0.md)
+* [ATDD, 클린 코드 with Spring 8기](https://github.com/qwe5507/TIL/blob/main/JAVA/ATDD%2C%20%ED%81%B4%EB%A6%B0%20%EC%BD%94%EB%93%9C%20with%20Spring%208%EA%B8%B0.md)
+* [JDK 11 vs JDK 17](https://github.com/qwe5507/TIL/blob/main/JAVA/JDK11%20vs%20JDK17.md)
     
 ## WEB
 * 모든 개발자를 위한 HTTP 웹 기본 지식
