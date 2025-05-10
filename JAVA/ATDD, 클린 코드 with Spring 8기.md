@@ -7,6 +7,74 @@
 - [🚀 2단계 - 지하철 노선 관리](https://github.com/next-step/atdd-subway-map/pull/1057)
 - [🚀 3단계 - 지하철 구간 관리](https://github.com/next-step/atdd-subway-map/pull/1091)
 
+**1. 인수테스트는 시나리오가 잘 드러나야 한다.**
+
+**Before**
+```java
+     /**
+     * When 지하철 노선을 생성하면
+     * Then 지하철 노선 목록 조회 시 생성한 노선을 찾을 수 있다
+     */
+    @DisplayName("노선을 생성한다.")
+    @Test
+    void apiCreateLine() {
+        // when
+        Map<String, String> params = createLineRequestPixture("신분당선", "bg-red-600", 1L, 2L);
+
+        ExtractableResponse<Response> response = RestAssured.given().log().all()
+                .body(params)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when().post("/lines")
+                .then().log().all()
+                .extract();
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+
+        // then
+        final ExtractableResponse<Response> extract = apiGetLines();
+        assertThat(extract.jsonPath().getList("name")).contains("신분당선");
+        assertThat(extract.jsonPath().getList("color")).contains("bg-red-600");
+    }
+```
+
+**After**
+```java
+     /**
+     * When 지하철 노선을 생성하면
+     * Then 지하철 노선 목록 조회 시 생성한 노선을 찾을 수 있다
+     */
+    @DisplayName("노선을 생성한다.")
+    @Test
+    void apiCreateLine() {
+        // when
+        노선이_생성되어_있다("신분당선", "bg-red-600", 1L, 2L);
+
+        // then
+        final ExtractableResponse<Response> extract = 노선목록을_조회한다();
+        assertThat(extract.jsonPath().getList("name")).contains("신분당선");
+        assertThat(extract.jsonPath().getList("color")).contains("bg-red-600");
+    }
+
+    public static ExtractableResponse<Response> 노선목록을_조회한다() {
+        return RestAssured.given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when().get("/lines")
+                .then().log().all()
+                .statusCode(HttpStatus.OK.value())
+                .extract();
+    }
+
+    public static ExtractableResponse<Response> 노선을_조회한다(final Long lineId) {
+        return RestAssured.given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when().get("/lines/" + lineId)
+                .then().log().all()
+                .statusCode(HttpStatus.OK.value())
+                .extract();
+    }
+```
+- 시나리오가 인수테스트에 잘 드러날수 있게 한글메소드를 활용하여 작성한다.
 --- 
 ## 2. 인수 테스트와 TDD
 - [🚀 실습 - 단위 테스트 작성](https://github.com/next-step/atdd-subway-path/pull/694)
