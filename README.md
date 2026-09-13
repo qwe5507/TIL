@@ -96,6 +96,12 @@
 * [SSL과 암호기술](https://github.com/qwe5507/TIL/blob/main/Network/SSL%EA%B3%BC%20%EC%95%94%ED%98%B8%EA%B8%B0%EC%88%A0.md)
 * [포트포워딩](https://github.com/qwe5507/TIL/blob/main/Network/%ED%8F%AC%ED%8A%B8%ED%8F%AC%EC%9B%8C%EB%94%A9.md)
 
+## SYSTEM
+* [이벤트기반_마이크로서비스_구축](https://github.com/qwe5507/TIL/tree/main/System/%EC%9D%B4%EB%B2%A4%ED%8A%B8%EA%B8%B0%EB%B0%98_%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4_%EA%B5%AC%EC%B6%95)
+* [요즘_개발자를_위한_시스템_설계_수업](https://github.com/qwe5507/TIL/tree/main/System/%EC%9A%94%EC%A6%98_%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC_%EC%9C%84%ED%95%9C_%EC%8B%9C%EC%8A%A4%ED%85%9C_%EC%84%A4%EA%B3%84_%EC%88%98%EC%97%85)
+* [데이터 중심 어플리케이션 설계](https://github.com/qwe5507/TIL/tree/main/System/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A4%91%EC%8B%AC%20%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%20%EC%84%A4%EA%B3%84)
+
+
 ## Util
 * git
    * [git01](https://github.com/qwe5507/TIL/blob/main/Util/Git/01.Git.md)
